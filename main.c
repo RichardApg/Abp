@@ -5,14 +5,13 @@
 
 int main() {
     char nombres[MAX_PRODUCTOS][50];
-    int tiempos[MAX_PRODUCTOS], recursos[MAX_PRODUCTOS], cantidades[MAX_PRODUCTOS];
+    float tiempos[MAX_PRODUCTOS], recursos[MAX_PRODUCTOS], cantidades[MAX_PRODUCTOS];
     int numProductos = 0;
-    int opcion, tiempoDisponible, recursosDisponibles;
+    int opcion;
+    float tiempoDisponible, recursosDisponibles;
 
-    printf("Ingrese el tiempo de produccion disponible (en horas): ");
-    scanf("%d", &tiempoDisponible);
-    printf("Ingrese la cantidad de recursos disponibles (dolares): ");
-    scanf("%d", &recursosDisponibles);
+    tiempoDisponible = leerDecimalPositivo("Ingrese el tiempo de produccion disponible (en horas): ");
+    recursosDisponibles = leerDecimalPositivo("Ingrese la cantidad de recursos disponibles(en dolares): ");
 
     do {
         printf("\nMenu:\n");
@@ -24,28 +23,38 @@ int main() {
         printf("6. Salir\n");
         printf("Elija una opcion: ");
         scanf("%d", &opcion);
-        getchar(); // Limpieza del buffer
+        getchar(); // Limpiar buffer
 
-        if (opcion == 1) {
-            ingresarProductos(nombres, tiempos, recursos, cantidades, &numProductos);
-        } else if (opcion == 2) {
-            editarProducto(nombres, tiempos, recursos, cantidades, numProductos);
-        } else if (opcion == 3) {
-            eliminarProducto(nombres, tiempos, recursos, cantidades, &numProductos);
-        } else if (opcion == 4) {
-            int tiempoTotal, recursosTotal;
-            calcularTotales(tiempos, recursos, cantidades, numProductos, &tiempoTotal, &recursosTotal);
-            printf("Tiempo total: %d horas\n", tiempoTotal);
-            printf("Recursos totales: %d\n", recursosTotal);
-            if (verificarFactibilidad(tiempoTotal, recursosTotal, tiempoDisponible, recursosDisponibles)) {
-                printf("La produccion es factible.\n");
-            } else {
-                printf("No se puede cumplir con la demanda.\n");
+        switch (opcion) {
+            case 1:
+                ingresarProductos(nombres, tiempos, recursos, cantidades, &numProductos);
+                break;
+            case 2:
+                editarProducto(nombres, tiempos, recursos, cantidades, numProductos);
+                break;
+            case 3:
+                eliminarProducto(nombres, tiempos, recursos, cantidades, &numProductos);
+                break;
+            case 4: {
+                float tiempoTotal, recursosTotal;
+                calcularTotales(tiempos, recursos, cantidades, numProductos, &tiempoTotal, &recursosTotal);
+                printf("Tiempo total: %.2f horas\n", tiempoTotal);
+                printf("Recursos totales: %.2f\n", recursosTotal);
+                if (verificarFactibilidad(tiempoTotal, recursosTotal, tiempoDisponible, recursosDisponibles)) {
+                    printf("La produccion es factible.\n");
+                } else {
+                    printf("No se puede cumplir con la demanda.\n");
+                }
+                break;
             }
-        } else if (opcion == 5) {
-            mostrarProductos(nombres, tiempos, recursos, cantidades, numProductos);
-        } else if (opcion != 6) {
-            printf("Opcion no valida. Intente de nuevo.\n");
+            case 5:
+                mostrarProductos(nombres, tiempos, recursos, cantidades, numProductos);
+                break;
+            case 6:
+                printf("Saliendo del programa.\n");
+                break;
+            default:
+                printf("Opcion no valida. Intente de nuevo.\n");
         }
     } while (opcion != 6);
 
