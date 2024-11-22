@@ -11,7 +11,7 @@ int main() {
 
     printf("Ingrese el tiempo de produccion disponible (en horas): ");
     scanf("%d", &tiempoDisponible);
-    printf("Ingrese la cantidad de recursos disponibles: ");
+    printf("Ingrese la cantidad de recursos disponibles (dolares): ");
     scanf("%d", &recursosDisponibles);
 
     do {
@@ -24,6 +24,7 @@ int main() {
         printf("6. Salir\n");
         printf("Elija una opcion: ");
         scanf("%d", &opcion);
+        getchar(); // Limpieza del buffer
 
         if (opcion == 1) {
             ingresarProductos(nombres, tiempos, recursos, cantidades, &numProductos);
@@ -44,7 +45,7 @@ int main() {
         } else if (opcion == 5) {
             mostrarProductos(nombres, tiempos, recursos, cantidades, numProductos);
         } else if (opcion != 6) {
-            printf("Opción no valida. Intente de nuevo.\n");
+            printf("Opcion no valida. Intente de nuevo.\n");
         }
     } while (opcion != 6);
 
