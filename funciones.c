@@ -7,7 +7,7 @@ void ingresarProductos(char nombres[][50], int tiempos[], int recursos[], int ca
     scanf("%s", nombres[*numProductos]);
     printf("Ingrese el tiempo de fabricacion (en horas): ");
     scanf("%d", &tiempos[*numProductos]);
-    printf("Ingrese los recursos necesarios: ");
+    printf("Ingrese los costos necesarios: ");
     scanf("%d", &recursos[*numProductos]);
     printf("Ingrese la cantidad demandada: ");
     scanf("%d", &cantidades[*numProductos]);
@@ -25,7 +25,7 @@ void editarProducto(char nombres[][50], int tiempos[], int recursos[], int canti
             scanf("%s", nombres[i]);
             printf("Nuevo tiempo de fabricacion: ");
             scanf("%d", &tiempos[i]);
-            printf("Nuevos recursos necesarios: ");
+            printf("Nuevos costos necesarios: ");
             scanf("%d", &recursos[i]);
             printf("Nueva cantidad demandada: ");
             scanf("%d", &cantidades[i]);
